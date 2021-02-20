@@ -1,9 +1,13 @@
 from ynab_sdk import YNAB
 from ynab_sdk.api.models.requests.transaction import TransactionRequest
-
+from datetime import date
 
 def send_transactions(config, bank_config, transactions):
     ynab = YNAB(config.access_token)
+
+    #YNAB doesn't accept future-dated transactions, but ING sometimes produces them
+    #just drop them from import until their actual booking date
+    transactions = filter(lambda t: date.fromisoformat(t.date) <= date.today(),  transactions)
 
     transfer_payee_id = ""
     if config.cash_account_id != "":
