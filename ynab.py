@@ -32,7 +32,7 @@ def send_transactions(config, bank_config, transactions):
 
     if response:
         if 'error' in response:
-            print(f'Account {bold(bank_config.iban)}: YNAB import failed with Error: {response}')
+            print(f'Account {bank_config.iban}: YNAB import failed with Error: {response}')
         elif 'data' in response:
             if response['data']['duplicate_import_ids']:
                 print(f'Account {bank_config.iban}: {len(response["data"]["duplicate_import_ids"])} duplicate transations were not imported')
