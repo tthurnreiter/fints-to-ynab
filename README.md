@@ -4,6 +4,8 @@ This Python script imports transactions from banks that support the German FinTS
 
 The last 10 days of transactions are imported. It's safe to run this script periodically as duplicates (already imported transactions) are filtered out.
 
+It probably only works with german ING at the moment.
+
 ## Settings
 Connection details need to be set up in a `settings.json` file in the project folder, see an example at `settings.sample.json`.
 
@@ -27,3 +29,5 @@ Multiple bank accounts can be setup in the array `"fints"`.
 Run the script with:
 `python3 fints-to-ynab.py`
 
+##Using Docker
+`docker-compose build && docker-compose up -d`, then run `docker start fints-to-ynab` periodically, e.g. by adding `*/10 * * * * docker start fints-to-ynab` to crontab to run every 10 minutes
