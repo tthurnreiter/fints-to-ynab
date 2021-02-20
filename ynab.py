@@ -7,7 +7,13 @@ def send_transactions(config, bank_config, transactions):
 
     #YNAB doesn't accept future-dated transactions, but ING sometimes produces them
     #just drop them from import until their actual booking date
-    transactions = filter(lambda t: date.fromisoformat(t.date) <= date.today(),  transactions)
+    transactions = list(filter(lambda t: date.fromisoformat(t.date) <= date.today(),  transactions))
+
+    print(transactions)
+    for t in transactions:
+        for c in config.clear_memos:
+            if c.lower() in t.payee.lower():
+                t.memo = None
 
     transfer_payee_id = ""
     if config.cash_account_id != "":
