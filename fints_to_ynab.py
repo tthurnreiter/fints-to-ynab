@@ -30,7 +30,6 @@ class Config:
     budget_id: str
     cash_account_id: str = ''
     fints: List[FintsConfig] = []
-    clear_memos: List[str] = []
 
     def __init__(self, config_file_path: str):
         # init config pbjects with path to config file
@@ -43,7 +42,6 @@ class Config:
                     self.cash_account_id = c_dict['ynab']['cash_account_id']
 
                 self.fints = list(map(FintsConfig, c_dict['fints']))
-                self.clear_memos = list(c_dict['clear_memos'])
                 
         except FileNotFoundError:
             print("settings.json not found")

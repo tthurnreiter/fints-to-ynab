@@ -14,6 +14,5 @@
         "access_token": "xxx",
         "budget_id": "123",
         "cash_account_id": ""
-    },
-    "clear_memos": [ "aldi", "lidl", "netto" ]
+    }
 }
