@@ -29,5 +29,5 @@ Multiple bank accounts can be setup in the array `"fints"`.
 Run the script with:
 `python3 fints-to-ynab.py`
 
-##Using Docker
-`docker-compose build && docker-compose up -d`, then run `docker start fints-to-ynab` periodically, e.g. by adding `*/10 * * * * docker start fints-to-ynab` to crontab to run every 10 minutes
+## Using Docker
+`docker-compose build && docker-compose up -d`, then run `docker start fints-to-ynab` periodically, e.g. by adding `*/10 * * * * /usr/bin/docker start fints-to-ynab` to crontab to run every 10 minutes
