@@ -15,7 +15,6 @@ def is_cash_withdrawl(transaction):
     return False
 
 def transform_fints_transaction(transaction, parse_paypal=False):
-    print(transaction)
     payee = transaction['applicant_name'] or ''
     memo = transaction['purpose'] or ''
 
