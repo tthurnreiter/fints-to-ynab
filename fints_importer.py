@@ -5,9 +5,12 @@ from models import Transaction
 import hashlib
 
 def transform_paypal_transaction(payee, memo):
-    if 'paypal' in payee.lower() and 'Ihr Einkauf' in memo:
-        payee = memo[memo.find('Ihr Einkauf bei ') + 16 : None if memo.find('AWV-MELDEPFLICHT') == -1 else memo.find('AWV-MELDEPFLICHT')]
-        memo = 'PayPal'
+    if 'paypal' in payee.lower():
+        if 'Ihr Einkauf' in memo:
+            payee = memo[memo.find('Ihr Einkauf bei ') + 16 : None if memo.find('AWV-MELDEPFLICHT') == -1 else memo.find('AWV-MELDEPFLICHT')]
+            memo = 'PayPal'
+        else:
+            memo = 'PayPal'
     return payee, memo
 
 def is_cash_withdrawl(transaction):
