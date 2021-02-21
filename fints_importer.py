@@ -21,6 +21,8 @@ def transform_fints_transaction(transaction, parse_paypal=False):
     if parse_paypal:
         payee, memo = transform_paypal_transaction(payee, memo)
 
+    memo = f"{transaction['posting_text'] or ''} / {memo}"
+
     return Transaction(
         date=transaction['date'].isoformat(),
         amount=int(transaction['amount'].amount * 1000),
