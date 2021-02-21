@@ -2,6 +2,7 @@ from fints.client import FinTS3PinTanClient
 from fints.utils import minimal_interactive_cli_bootstrap
 from datetime import date, timedelta
 from models import Transaction
+import hashlib
 
 def transform_paypal_transaction(payee, memo):
     if 'paypal' in payee.lower() and 'Ihr Einkauf' in memo:
@@ -28,7 +29,8 @@ def transform_fints_transaction(transaction, parse_paypal=False):
         amount=int(transaction['amount'].amount * 1000),
         payee=payee,
         memo=memo,
-        cash_withdrawl = is_cash_withdrawl(transaction)
+        cash_withdrawl = is_cash_withdrawl(transaction),
+        hash = hashlib.sha256( ("%s:%s:%s:%s"%(transaction['applicant_name'], transaction['purpose'], transaction['amount'].amount,  transaction['date'].isoformat() )).encode('utf-8') ).hexdigest()
     )
 
 def get_transactions(bank_config):

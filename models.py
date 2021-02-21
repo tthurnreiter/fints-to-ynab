@@ -7,3 +7,4 @@ class Transaction:
     payee: str
     memo: str
     cash_withdrawl: bool
+    hash: str

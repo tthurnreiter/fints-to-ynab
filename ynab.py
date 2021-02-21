@@ -1,7 +1,6 @@
 from ynab_sdk import YNAB
 from ynab_sdk.api.models.requests.transaction import TransactionRequest
 from datetime import date
-import hashlib
 
 def send_transactions(config, bank_config, transactions):
     ynab = YNAB(config.access_token)
@@ -25,7 +24,7 @@ def send_transactions(config, bank_config, transactions):
             payee_name = None if transaction.cash_withdrawl and transfer_payee_id != "" else transaction.payee,
             payee_id = transfer_payee_id if transaction.cash_withdrawl and transfer_payee_id != "" else None,
             # import_id can only be 36 characters
-            import_id = ( "API:" + hashlib.sha256(("%s:%s:%s:%s" % (transaction.payee, transaction.memo, transaction.amount, transaction.date)).encode('utf-8')).hexdigest() )[:36]
+            import_id = ( "API:" + transaction.hash )[:36]
         )
 
     transaction_req = list(map(create_request, transactions))
