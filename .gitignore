@@ -1,5 +1,5 @@
 venv/
-settings.json
+settings.json*
 db.json
 __pycache__
 
